@@ -13,3 +13,18 @@ class GroupSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Group
         fields = ['url', 'name']
+
+
+class ItemSeriallizer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Item
+        fields = ['name', 'list', 'done']
+
+
+class ListSeriallizer(serializers.HyperlinkedModelSerializer):
+    item_set = ItemSeriallizer(many=True)
+
+    class Meta:
+        model = List
+        fields = ['name', 'owner', 'url', 'item_set']
+
